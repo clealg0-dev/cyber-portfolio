@@ -123,7 +123,7 @@ const EducationSection = () => {
           <button
             className="bg-white/30 hover:bg-white/50 border border-white/40 text-gray-900 hover:text-black
             px-4 py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-gray-700 flex flex-col items-center gap-1 min-w-[80px]"
-            onClick={() => setSelectedPdf(`src/assets/files/${edu.certificate}`)}
+            onClick={() => setSelectedPdf(`/files/${edu.certificate}`)}
           >
             <span className="text-2xl">📄</span>
             <span className="text-xs font-medium">Certificado</span>
@@ -169,7 +169,7 @@ const EducationSection = () => {
                 {course.certificate && (
                   <button
                     className="ml-auto bg-primary/20 hover:bg-primary/40 border border-primary/30 text-primary hover:text-primary-foreground px-2 py-1 rounded-lg transition-all duration-300 text-xs"
-                    onClick={() => setSelectedPdf(`src/assets/files/${course.certificate}`)}
+                    onClick={() => setSelectedPdf(`/files/${course.certificate}`)}
                   >
                     📄 Ver Certificado
                   </button>
