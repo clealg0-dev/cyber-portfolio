@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import briefCaseGif from "@/assets/gifs/briefcase.gif";
 import incalexaLogo from "@/assets/images/bxmart_logo.png";
 import nttLogo from "@/assets/images/ntt_logo.png";
 
-
 const ExperienceSection = () => {
-  const [activePopup, setActivePopup] = useState(null);
+  const [activePopup, setActivePopup] = useState<number | null>(null);
+
+  // Bloquear scroll al abrir popup
+  useEffect(() => {
+    if (activePopup !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [activePopup]);
 
   const experiences = [
     {
@@ -73,49 +84,58 @@ const ExperienceSection = () => {
           {experiences.map((exp, index) => (
             <div
               key={index}
-              className={`cyber-card group relative overflow-hidden flex items-start gap-6 pl-20 p-6 rounded-xl 
+              className={`cyber-card group relative overflow-hidden flex flex-col md:flex-row items-start md:items-center gap-4 p-6 rounded-xl 
                           bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-lg
-                          opacity-0 animate-fadeIn`}
+                          opacity-0 animate-fadeIn md:pl-20`}
               style={{ animationDelay: `${index * 0.3}s` }}
             >
-              {/* Nodo luminoso para la línea */}
+              {/* Nodo luminoso */}
               <div className="absolute left-6 top-8 w-6 h-6 rounded-full bg-cyan-400 border-4 border-background shadow-[0_0_15px_rgba(0,255,255,0.8)] animate-ping"></div>
               <div className="absolute left-6 top-8 w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-400 to-fuchsia-500 shadow-[0_0_25px_rgba(255,0,255,0.8)]"></div>
 
-              {/* Botón Ver más */}
+              {/* Emoji */}
+              <div className="text-4xl flex-shrink-0 self-center">{exp.icon}</div>
+
+              {/* Contenido */}
+              <div className="flex-1 flex flex-col">
+                <h3 className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent mb-2">
+                  {exp.role}
+                </h3>
+
+                <div className="text-lg mb-2 pl-0 md:pl-0">
+                  <a
+                    href={exp.companyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative text-accent hover:text-primary transition-colors duration-300
+                              after:block after:h-[2px] after:bg-gradient-to-r after:from-cyan-400 after:via-blue-400 after:to-purple-500 after:rounded after:absolute after:bottom-0 after:left-0 after:w-full after:scale-x-0 after:origin-left group-hover:after:scale-x-100 after:transition-transform after:duration-300"
+                  >
+                    {exp.company}
+                  </a>
+                </div>
+
+                <div className="text-sm mb-4 text-muted-foreground">
+                  {exp.date}
+                </div>
+
+                <p className="text-foreground leading-relaxed pl-0 md:pl-0">{exp.detailsSummary}</p>
+
+                {/* Botón móvil */}
+                <button
+                  onClick={() => setActivePopup(index)}
+                  className="mt-4 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-700 via-blue-700 to-purple-800 text-white font-bold shadow-lg hover:scale-105 transition-transform duration-300 text-center md:hidden"
+                >
+                  Ver más
+                </button>
+              </div>
+
+              {/* Botón escritorio */}
               <button
                 onClick={() => setActivePopup(index)}
-                className="absolute top-4 right-4 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-700 via-blue-700 to-purple-800 text-white font-bold shadow-lg hover:scale-105 transition-transform duration-300"
+                className="absolute top-4 right-4 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-700 via-blue-700 to-purple-800 text-white font-bold shadow-lg hover:scale-105 transition-transform duration-300 hidden md:block"
               >
                 Ver más
               </button>
-
-              <div className="flex-1">
-                <div className="flex items-start gap-4">
-                  <div className="text-4xl">{exp.icon}</div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent mb-2">
-                      {exp.role}
-                    </h3>
-                    <div className="text-lg mb-2">
-                      <a
-                        href={exp.companyUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-accent hover:text-primary transition-colors duration-300 relative after:block after:h-[2px] after:bg-gradient-to-r after:from-cyan-400 after:via-blue-400 after:to-purple-500 after:rounded after:absolute after:bottom-0 after:left-0 after:w-full after:scale-x-0 after:origin-left group-hover:after:scale-x-100 after:transition-transform after:duration-300"
-                      >
-                        {exp.company}
-                      </a>
-                    </div>
-                    <div className="text-sm mb-4 inline-block px-2 py-1 rounded-md border border-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 text-muted-foreground">
-                      {exp.date}
-                    </div>
-                    <p className="text-foreground leading-relaxed">
-                      {exp.detailsSummary}
-                    </p>
-                  </div>
-                </div>
-              </div>
             </div>
           ))}
         </div>

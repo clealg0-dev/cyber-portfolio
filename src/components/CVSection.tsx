@@ -28,7 +28,7 @@ const CVSection = () => {
     e.preventDefault();
     
     const subject = encodeURIComponent(formData.subject);
-    const body = encodeURIComponent(`Email: ${formData.email}\n\n${formData.message}`);
+    const body = encodeURIComponent(formData.message);
     const mailtoLink = `mailto:clealguera@gmail.com?subject=${subject}&body=${body}`;
     
     window.location.href = mailtoLink;
@@ -91,19 +91,7 @@ const CVSection = () => {
                 Solicitud para CV Completo
               </h3>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Correo electrónico"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-input border-border text-foreground"
-                  />
-                </div>
-                
+              <form onSubmit={handleSubmit} className="space-y-6">                
                 <div>
                   <Input
                     type="text"

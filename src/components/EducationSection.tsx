@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import graduationCapGif from "@/assets/gifs/graduation-cap.gif";
 import pythonImg from "@/assets/images/python.gif";
 import hack4uImg from "@/assets/images/Hack4u_logo.png";
@@ -8,21 +8,18 @@ import bigSchoolImg from "@/assets/images/Big_school_logo.png";
 
 const EducationSection = () => {
   const [page, setPage] = useState(1);
-  const [selectedPdf, setSelectedPdf] = useState(null);
+  const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
 
-  // block scroll when pdf is open
   useEffect(() => {
     if (selectedPdf) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [selectedPdf]);
-
 
   const education = [
     {
@@ -78,17 +75,7 @@ const EducationSection = () => {
     education.map((edu, index) => (
       <div
         key={index}
-        className={`
-          relative z-10 
-          bg-gray-900/80 backdrop-blur-xl 
-          rounded-2xl p-4 mb-10
-          shadow-[0_8px_30px_rgba(0,0,0,0.5)]
-          border border-gray-700/60
-          transform transition-all duration-700 ease-in-out
-          hover:scale-105 hover:shadow-[0_12px_40px_rgba(0,0,0,0.7)]
-          opacity-0 translate-y-6
-          animate-fade-in-up
-        `}
+        className="education-block relative z-10 bg-gray-900/80 backdrop-blur-xl rounded-2xl p-4 mb-10 shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-gray-700/60 transform transition-all duration-700 ease-in-out hover:scale-105 hover:shadow-[0_12px_40px_rgba(0,0,0,0.7)] opacity-0 translate-y-6 animate-fade-in-up"
         style={{
           rotate: `${index % 2 === 0 ? "-1.5deg" : "1.5deg"}`,
           width: "65%",
@@ -99,19 +86,11 @@ const EducationSection = () => {
         <div className="flex items-start gap-4">
           <div className="text-4xl">{edu.icon}</div>
           <div className="flex-1">
-            <h3
-              className="text-xl md:text-2xl font-bold text-white mb-2 px-2 rounded-md"
-              style={{ textShadow: "0 0 6px rgba(255,255,255,0.4)" }}
-            >
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-2 px-2 rounded-md" style={{ textShadow: "0 0 6px rgba(255,255,255,0.4)" }}>
               {edu.title}
             </h3>
             <div className="text-lg mb-2">
-              <a
-                href={edu.institutionUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-200 hover:text-white transition-colors duration-300 underline decoration-dotted"
-              >
+              <a href={edu.institutionUrl} target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-white transition-colors duration-300 underline decoration-dotted">
                 {edu.institution}
               </a>
             </div>
@@ -120,24 +99,32 @@ const EducationSection = () => {
         </div>
 
         <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+        <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
           <button
-            className="bg-white/30 hover:bg-white/50 border border-white/40 text-gray-900 hover:text-black
-            px-4 py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-gray-700 flex flex-col items-center gap-1 min-w-[80px]"
-            onClick={() => setSelectedPdf(`/files/${edu.certificate}`)}
+            className="pdf-button bg-white/30 hover:bg-white/50 border border-white/40 text-gray-900 hover:text-black px-4 py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-gray-700 flex flex-col items-center gap-1 min-w-[80px]"
+            onClick={() => {
+              const isMobile = window.innerWidth <= 767;
+              if (isMobile) {
+                window.open(`/files/${edu.certificate}`, "_blank");
+              } else {
+                setSelectedPdf(`/files/${edu.certificate}`);
+              }
+            }}
           >
             <span className="text-2xl">📄</span>
             <span className="text-xs font-medium">Certificado</span>
           </button>
         </div>
+        </div>
       </div>
     ));
 
   const renderExtraCourseBlocks = () =>
-    <div className="w-full h-full flex flex-col items-center gap-10 mt-18 transition-opacity duration-700">
+    <div className="extra-course-container w-full h-full flex flex-col items-center gap-10 mt-18 transition-opacity duration-700 max-h-[650px] overflow-y-auto md:max-h-full md:overflow-y-visible">
       {extraCourses.map((course, index) => (
         <div
           key={index}
-          className="cyber-card relative z-10 bg-white/80 backdrop-blur-md shadow-lg rounded-xl p-4 transform transition-transform duration-500 hover:scale-105 border border-gray-200"
+          className="extra-course-block cyber-card relative z-10 bg-white/80 backdrop-blur-md shadow-lg rounded-xl p-4 transform transition-transform duration-500 hover:scale-105 border border-gray-200"
           style={{
             rotate: `${index % 2 === 0 ? "-1.5deg" : "1.5deg"}`,
             width: "50%",
@@ -145,31 +132,26 @@ const EducationSection = () => {
           }}
         >
           <div className="flex items-start gap-3">
-            <img 
-              src={course.icon} 
-              alt={course.name} 
-              className="w-10 h-10 object-contain" 
-            />
+            <img src={course.icon} alt={course.name} className="w-10 h-10 object-contain" />
             <div className="flex-1 flex flex-col">
-              <h3
-                className="text-lg font-bold text-primary mb-1"
-                style={{ textShadow: "0 0 4px rgba(0,0,0,0.3)" }}
-              >
+              <h3 className="text-lg font-bold text-primary mb-1" style={{ textShadow: "0 0 4px rgba(0,0,0,0.3)" }}>
                 {course.platform} - {course.name}
               </h3>
               <div className="flex items-center gap-3">
-                <a
-                  href={course.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-accent hover:text-primary transition-colors duration-300 underline decoration-dotted text-sm"
-                >
+                <a href={course.url} target="_blank" rel="noopener noreferrer" className="text-accent hover:text-primary transition-colors duration-300 underline decoration-dotted text-sm">
                   Ir al curso
                 </a>
                 {course.certificate && (
                   <button
                     className="ml-auto bg-primary/20 hover:bg-primary/40 border border-primary/30 text-primary hover:text-primary-foreground px-2 py-1 rounded-lg transition-all duration-300 text-xs"
-                    onClick={() => setSelectedPdf(`/files/${course.certificate}`)}
+                    onClick={() => {
+                      const isMobile = window.innerWidth <= 767;
+                      if (isMobile) {
+                        window.open(`/files/${course.certificate}`, "_blank");
+                      } else {
+                        setSelectedPdf(`/files/${course.certificate}`);
+                      }
+                    }}
                   >
                     📄 Ver Certificado
                   </button>
@@ -181,92 +163,53 @@ const EducationSection = () => {
       ))}
     </div>;
 
-  const togglePage = () => {
-    setPage(page === 1 ? 2 : 1);
-  };
+  const togglePage = () => setPage(page === 1 ? 2 : 1);
 
   return (
-    <section id="education" className="py-32 relative overflow-hidden">
-      <div className="text-center mb-16 relative z-30 mt-12">
+    <section id="education" className="py-40 md:py-32 relative overflow-hidden min-h-[1200px] md:min-h-[800px]">
+      <div className="text-center mb-16 relative z-30 mt-6 md:mt-12">
         <h2 className="flex items-center justify-center text-4xl md:text-5xl font-bold mb-4">
-          <img
-            src={graduationCapGif}
-            alt="GraduationCap"
-            className="w-16 h-16 mr-4 animate-pulse-slow"
-          />
-          <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-500 bg-clip-text text-transparent 
-                          font-extrabold text-shadow-md-soft animate-gradientMove-slow">
+          <img src={graduationCapGif} alt="GraduationCap" className="w-16 h-16 mr-4 animate-pulse-slow" />
+          <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-500 bg-clip-text text-transparent font-extrabold text-shadow-md-soft animate-gradientMove-slow">
             Educación y Formaciones
           </span>
         </h2>
         <div className="mx-auto w-48 h-2 bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-500 rounded-full animate-pulse-slow mt-2"></div>
       </div>
 
-      <div className="relative w-full max-w-6xl mx-auto h-[800px] flex justify-center items-center">
+      <div className="relative w-full max-w-6xl mx-auto h-[800px] md:h-[800px] flex justify-center items-center">
         <div className="absolute w-[90%] h-full rounded-3xl shadow-inner transform -rotate-1 bg-white/10 z-0"></div>
 
         {/* Sheet 1 */}
-        <div
-          className={`absolute w-[90%] h-full rounded-3xl shadow-xl transition-all duration-1000 ease-in-out
-            ${page === 1 
-              ? "translate-x-0 rotate-1 opacity-100 z-20" 
-              : "-translate-x-[60%] -rotate-3 opacity-0 z-10"
-            }
-          `}
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url(${sheet1Background})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        >
-          <div className="w-full h-full flex flex-col items-center mt-16 transition-opacity duration-700">
+        <div className={`absolute w-[90%] h-[700px] md:h-[800px] rounded-3xl shadow-xl transition-all duration-1000 ease-in-out overflow-y-hidden ${page === 1 ? "translate-x-0 rotate-1 opacity-100 z-20" : "-translate-x-[60%] -rotate-3 opacity-0 z-10"}`}
+          style={{ backgroundImage: `linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url(${sheet1Background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+          <div className="w-full h-full flex flex-col items-center mt-16 transition-opacity duration-700 overflow-y-auto md:overflow-y-visible">
             <h2 className="text-3xl md:text-4xl font-extrabold text-primary relative mb-8
               bg-gradient-to-r from-primary/20 via-white/30 to-primary/20 
               px-6 py-3 rounded-2xl shadow-md border border-primary/40 
-              backdrop-blur-sm tracking-wide"
-              >
+              backdrop-blur-sm tracking-wide">
                 📜 Títulos Oficiales
             </h2>
             {renderEducationBlocks()}
           </div>
-
-          <button
-            onClick={togglePage}
-            className="absolute top-4 right-4 bg-primary/30 hover:bg-primary/50 text-white px-4 py-2 rounded-lg shadow-md transition-all z-30"
-          >
+          <button onClick={togglePage} className="absolute top-4 right-4 bg-primary/30 hover:bg-primary/50 text-white px-4 py-2 rounded-lg shadow-md transition-all z-30">
             📖 Pasar hoja
           </button>
         </div>
 
         {/* Sheet 2 */}
-        <div
-          className={`absolute w-[90%] h-full rounded-3xl shadow-xl bg-cover bg-center transition-all ease-in-out
-            ${page === 2 
-              ? "translate-x-0 -rotate-1 opacity-100 z-20 duration-1000" 
-              : "opacity-0 z-10 duration-300"
-            }
-          `}
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url(${sheet2Background})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        >
+        <div className={`absolute w-[90%] h-[700px] md:h-[800px] rounded-3xl shadow-xl bg-cover bg-center transition-all ease-in-out ${page === 2 ? "translate-x-0 -rotate-1 opacity-100 z-20 duration-1000" : "opacity-0 z-10 duration-300"}`}
+          style={{ backgroundImage: `linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url(${sheet2Background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
           <div className="w-full h-full flex flex-col items-center mt-16 transition-opacity duration-700">
             <h2 className="text-3xl md:text-4xl font-extrabold text-primary relative mb-8
               bg-gradient-to-r from-accent/20 via-white/30 to-accent/20 
               px-6 py-3 rounded-2xl shadow-md border border-accent/40 
-              backdrop-blur-sm tracking-wide"
-              >
+              backdrop-blur-sm tracking-wide">
                 📚 Formaciones extra curriculares
             </h2>
             {renderExtraCourseBlocks()}
           </div>
-
-          <button
-            onClick={togglePage}
-            className="absolute top-4 right-4 bg-primary/30 hover:bg-primary/50 text-white px-4 py-2 rounded-lg shadow-md transition-all z-30"
-          >
+          <button onClick={togglePage} className="absolute top-4 right-4 bg-primary/30 hover:bg-primary/50 text-white px-4 py-2 rounded-lg shadow-md transition-all z-30">
             📖 Hoja anterior
           </button>
         </div>
@@ -275,22 +218,12 @@ const EducationSection = () => {
       {selectedPdf && (
         <div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
           <div className="bg-white w-[90%] md:w-[70%] h-[80%] rounded-xl relative shadow-lg overflow-hidden">
-            <button
-              className="absolute top-4 right-4 text-white bg-red-500 px-4 py-2 rounded-lg z-50"
-              onClick={() => setSelectedPdf(null)}
-            >
-              Cerrar
-            </button>
-            <iframe
-              src={selectedPdf}
-              className="w-full h-full"
-              frameBorder="0"
-            ></iframe>
+            <button className="absolute top-4 right-4 text-white bg-red-500 px-4 py-2 rounded-lg z-50" onClick={() => setSelectedPdf(null)}>Cerrar</button>
+            <iframe src={selectedPdf} className="w-full h-full" frameBorder="0"></iframe>
           </div>
         </div>
       )}
 
-      {/* custom animations */}
       <style>{`
         @keyframes pulse {
           0%, 100% { opacity: 0.7; transform: scale(1); }
@@ -310,6 +243,26 @@ const EducationSection = () => {
 
         .text-shadow-md-soft {
           text-shadow: 0 0 3px #0ff, 0 0 6px #0ff, 0 0 10px #0ff;
+        }
+
+        /* Responsive ajustes para móvil */
+        @media (max-width: 767px) {
+          .education-block, .extra-course-block {
+            width: 90% !important;
+            transform: rotate(0deg) !important;
+          }
+
+          .extra-course-container {
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 600px;
+            overflow-y: auto;
+          }
+
+          .pdf-button {
+            padding: 0.5rem 1rem;
+            min-width: auto;
+          }
         }
       `}</style>
     </section>

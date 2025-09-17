@@ -155,11 +155,10 @@
   background: rgba(0,0,0,0.60);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  z-index: 2147483646; /* extremely high */
+  z-index: 2147483646; 
   pointer-events: auto;
 }
 
-/* modal content */
 .aboutme-content {
   width: 100%;
   max-width: 900px;
@@ -168,8 +167,8 @@
   border-radius: 1rem;
   border: 1px solid rgba(159, 13, 255, 0.18);
   overflow: hidden;
-  position: relative; /* inside the backdrop */
-  z-index: 2147483647; /* above the backdrop */
+  position: relative; 
+  z-index: 2147483647; 
 }
 
 @keyframes pulse-glow {
@@ -310,27 +309,28 @@
   background: transparent;
 }
 
-.aboutme-backdrop {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.60);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  z-index: 2147483646;
-  pointer-events: auto;
-}
+@media (max-width: 767px) {
+  .education-block, .extra-course-block {
+    width: 90% !important;
+    transform: rotate(0deg) !important;
+  }
 
-.aboutme-content {
-  width: 100%;
-  max-width: 900px;
-  height: 80vh;
-  background: hsl(var(--background) / 0.95);
-  border-radius: 1rem;
-  border: 1px solid rgba(159, 13, 255, 0.18);
-  overflow: hidden;
-  position: relative;
-  z-index: 2147483647;
+  .education-block .flex.items-start.gap-4 {
+    flex-direction: row !important;      /* Emoji y texto/botón en horizontal */
+    align-items: center !important;      /* Centrar verticalmente */
+  }
+
+  .extra-course-container {
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 600px; /* scroll interno */
+    overflow-y: auto;
+  }
+
+  .pdf-button {
+    margin-left: 0.5rem;   /* Separación entre emoji y botón */
+    padding: 0.25rem 0.5rem;  /* Más compacto */
+    min-width: auto;
+    font-size: 0.7rem;        /* Ajustar tamaño del texto */
+  }
 }

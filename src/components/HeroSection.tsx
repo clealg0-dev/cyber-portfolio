@@ -133,15 +133,17 @@ const HeroSection = () => {
   const [clickedOnce, setClickedOnce] = useState(false);
   const handleClick = () => {
     setShowAbout(!showAbout);
-    if (!clickedOnce) setClickedOnce(true); // marcamos que ya se clickeó
+    if (!clickedOnce) setClickedOnce(true); 
   };
 
-  // Bloquear scroll en body cuando el modal está abierto
+  // Block scroll
   useEffect(() => {
     if (showAbout) {
-      document.body.classList.add("overflow-hidden");
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden"; 
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
   }, [showAbout]);
 
