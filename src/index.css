@@ -6,8 +6,8 @@
 @layer base {
   :root {
     /* Cybersecurity Dark Theme */
-    --background: 240 11% 11%; /* #1e1e2f */
-    --foreground: 0 0% 88%; /* #e0e0e0 */
+    --background: 240 11% 11%;
+    --foreground: 0 0% 88%; 
 
     --card: 240 11% 11%;
     --card-foreground: 0 0% 88%;
@@ -15,10 +15,10 @@
     --popover: 240 11% 11%;
     --popover-foreground: 0 0% 88%;
 
-    --primary: 258 100% 50%; /* #3f00ff */
+    --primary: 258 100% 50%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 270 100% 13%; /* #2a003f */
+    --secondary: 270 100% 13%;
     --secondary-foreground: 0 0% 88%;
 
     --muted: 240 7% 16%;
@@ -145,7 +145,6 @@
 
 #app-modal-root { position: relative; z-index: 2147483646; }
 
-/* backdrop */
 .aboutme-backdrop {
   position: fixed;
   inset: 0;
@@ -315,22 +314,23 @@
     transform: rotate(0deg) !important;
   }
 
+  /* center items */
   .education-block .flex.items-start.gap-4 {
-    flex-direction: row !important;      /* Emoji y texto/botón en horizontal */
-    align-items: center !important;      /* Centrar verticalmente */
+    flex-direction: row !important;
+    align-items: center !important;
   }
 
   .extra-course-container {
     flex-direction: column;
     gap: 1rem;
-    max-height: 600px; /* scroll interno */
+    max-height: 600px;
     overflow-y: auto;
   }
 
   .pdf-button {
-    margin-left: 0.5rem;   /* Separación entre emoji y botón */
-    padding: 0.25rem 0.5rem;  /* Más compacto */
+    margin-left: 0.5rem;
+    padding: 0.25rem 0.5rem;
     min-width: auto;
-    font-size: 0.7rem;        /* Ajustar tamaño del texto */
+    font-size: 0.7rem;
   }
 }

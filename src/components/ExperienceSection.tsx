@@ -58,7 +58,7 @@ const ExperienceSection = () => {
   return (
     <section id="experience" className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
-        {/* Título de sección */}
+        {/* Title section */}
         <div className="text-center mb-16 relative">
           <h2 className="flex items-center justify-center text-4xl md:text-5xl font-bold mb-4">
             <img
@@ -74,9 +74,8 @@ const ExperienceSection = () => {
           <div className="mx-auto w-48 h-2 bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-500 rounded-full animate-pulse-slow mt-2"></div>
         </div>
 
-        {/* Lista de experiencias con línea futurista */}
         <div className="relative max-w-4xl mx-auto space-y-16">
-          {/* Línea vertical futurista a la izquierda */}
+          {/* Timeline */}
           <div className="absolute left-6 top-0 h-full w-1.5 bg-gradient-to-b from-cyan-400 via-blue-500 to-purple-600 shadow-[0_0_20px_rgba(0,255,255,0.7)] rounded-full animate-pulse"></div>
           <div className="absolute left-3.5 top-0 h-full w-0.5 bg-gradient-to-b from-fuchsia-500 via-cyan-300 to-indigo-500 opacity-70 animate-[pulse_3s_infinite]"></div>
           <div className="absolute left-8 top-0 h-full w-0.5 bg-gradient-to-b from-blue-400 via-sky-500 to-violet-500 opacity-60 animate-[pulse_4s_infinite]"></div>
@@ -89,14 +88,13 @@ const ExperienceSection = () => {
                           opacity-0 animate-fadeIn md:pl-20`}
               style={{ animationDelay: `${index * 0.3}s` }}
             >
-              {/* Nodo luminoso */}
+              {/* Timeline dot */}
               <div className="absolute left-6 top-8 w-6 h-6 rounded-full bg-cyan-400 border-4 border-background shadow-[0_0_15px_rgba(0,255,255,0.8)] animate-ping"></div>
               <div className="absolute left-6 top-8 w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-400 to-fuchsia-500 shadow-[0_0_25px_rgba(255,0,255,0.8)]"></div>
 
-              {/* Emoji */}
               <div className="text-4xl flex-shrink-0 self-center">{exp.icon}</div>
 
-              {/* Contenido */}
+              {/* Content */}
               <div className="flex-1 flex flex-col">
                 <h3 className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent mb-2">
                   {exp.role}
@@ -120,7 +118,7 @@ const ExperienceSection = () => {
 
                 <p className="text-foreground leading-relaxed pl-0 md:pl-0">{exp.detailsSummary}</p>
 
-                {/* Botón móvil */}
+                {/* Mobile button */}
                 <button
                   onClick={() => setActivePopup(index)}
                   className="mt-4 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-700 via-blue-700 to-purple-800 text-white font-bold shadow-lg hover:scale-105 transition-transform duration-300 text-center md:hidden"
@@ -129,7 +127,7 @@ const ExperienceSection = () => {
                 </button>
               </div>
 
-              {/* Botón escritorio */}
+              {/* PC button */}
               <button
                 onClick={() => setActivePopup(index)}
                 className="absolute top-4 right-4 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-700 via-blue-700 to-purple-800 text-white font-bold shadow-lg hover:scale-105 transition-transform duration-300 hidden md:block"
@@ -141,7 +139,7 @@ const ExperienceSection = () => {
         </div>
       </div>
 
-      {/* POPUP Futurista */}
+      {/* POPUP */}
       {activePopup !== null && (
         <div className="fixed inset-0 flex justify-center items-center z-50 bg-black/60 transition-opacity duration-500">
           <div
@@ -166,7 +164,7 @@ const ExperienceSection = () => {
         </div>
       )}
 
-      {/* Animaciones personalizadas */}
+      {/* Custom animations */}
       <style>{`
         @keyframes pulse {
           0%, 100% { opacity: 0.7; transform: scale(1); }

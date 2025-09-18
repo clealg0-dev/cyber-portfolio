@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import rocketGif from "@/assets/gifs/rocket.gif";
 import winkGif from "@/assets/gifs/wink.gif";
-import bkImage from "@/assets/images/Background_aptitudes.png";
 
 
 interface AptitudeData {
@@ -246,7 +245,7 @@ const AptitudesSection = () => {
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Aptitude Modal */}
       {selectedAptitude && (
         <div className="modal-backdrop" onClick={closeModal}>
           <div className="modal-content mx-4" onClick={(e) => e.stopPropagation()}>

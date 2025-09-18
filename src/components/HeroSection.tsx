@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/images/Background_hero.jpg";
 import { useEffect, useState } from "react";
 import ModalPortal from "@/components/ModalPortal";
 import AboutMeWriter from "@/components/AboutMeWriter";
@@ -131,6 +130,7 @@ const HeroSection = () => {
   };
   const [showAbout, setShowAbout] = useState(false);
   const [clickedOnce, setClickedOnce] = useState(false);
+  
   const handleClick = () => {
     setShowAbout(!showAbout);
     if (!clickedOnce) setClickedOnce(true); 
@@ -187,13 +187,13 @@ const HeroSection = () => {
             />
           </h2>
 
+          {/* About Me */}
           {showAbout && (
             <ModalPortal>
               <div className="aboutme-backdrop">
                 <div
                   className="aboutme-content animate-fadeInModal flex flex-col"
                 >
-                  {/* Header */}
                   <div className="flex items-center justify-between p-4 border-b border-primary/40 flex-shrink-0">
                     <h3 className="text-xl font-bold text-primary">👨🏻‍💻 Sobre mí</h3>
                     <button
@@ -204,7 +204,6 @@ const HeroSection = () => {
                     </button>
                   </div>
 
-                  {/* Contenido scrollable */}
                   <div className="flex-1 overflow-y-auto p-6 custom-scrollbar prose prose-invert max-w-none">
                     <AboutMeWriter
                       text={`
